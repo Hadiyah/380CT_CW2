@@ -1,0 +1,75 @@
+
+#Here's what I have for greedy so far
+#Assumes list is already sorted
+#Will probably make sort algorith for unsorted lists (i'm thinking quick sort?)
+#Error if target is set to a number below first element
+#Error if target is set to a number above the total sum
+#Error if target is equal to first element array
+
+def greedySearch():
+    listLength = len(myList)
+    print ("List Length = ", len(myList))
+    biggestNum = myList[0]
+    print ("Target = ", target, "\n")
+    #print ("Biggest Num is: ",biggestNum)
+    biggestNumList = []
+    found = False
+    y=0
+    x=0
+
+
+    for i in range(len(myList)):
+           
+        biggestNumList.append(myList[i])
+        print ("Looking at element", i , ": ",myList[i])
+        
+        if x == target:
+            print("TARGET FOUND")
+            break
+        
+        elif myList[i]+x<target:
+            
+            two = abs((myList[i]+x)-target)
+            print ("Target is BELOW sum by ",two, "\n")
+            #print("Two ", two)
+            
+
+        else:# myList[i]+x> target:
+            
+            one = abs((myList[i]+x)-target)
+            print ("Target is ABOVE sum by ", one, "\n")
+            #print("One ", one)
+            break
+
+        x = sum(biggestNumList)
+
+    #print("Two ", two)
+    #print("One ", one)
+
+    if two>one: # if ABOVE answer is closer to target
+        print ("Closest solution to target is the sum of set: ", biggestNumList)
+    else: # if BELOW answer is closer to target
+        biggestNumList_length = len(biggestNumList)-1
+        ##print(biggestNumList_length) 
+        biggestNumList.remove(biggestNumList[biggestNumList_length])
+        print("Closest solution to target is the sum of set:", biggestNumList )
+
+        
+        
+                              
+        
+
+
+
+
+
+
+
+
+myList = [65,56,45,32,29,9,4]
+
+target = 184
+
+print ("The list is: ", myList)
+greedySearch()
+#print (myList[2])
