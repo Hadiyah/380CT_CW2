@@ -174,9 +174,9 @@ class SSP():
         newList = list(self.S)
         
         while len(newList) > 0 and newList[x] is not None and newList[x] not in candidate:
-
+            print(self.t," ",sum(candidate))
             
-            if self.t == sum(newList):
+            if self.t == sum(candidate):
                 newList.remove(max(newList))
                 break
             if max(newList) + total  <= self.t:
@@ -189,14 +189,17 @@ class SSP():
                 x =0
 
         endTime = time.time()
+
         TimeTaken = endTime - startTime
+
         self.TotalTime += TimeTaken
+
         if self.worst < TimeTaken:
             self.worst = TimeTaken
     
         if self.best > TimeTaken:
             self.best = TimeTaken
-
+        print(self.S," ", candidate, " ", self.t - total," ", total ," ",self.t)
         return self.best,self.worst,self.TotalTime,candidate,(self.t - total)
 
     def Iterative_Improvement(self, s):
@@ -227,22 +230,26 @@ q = 0
 
 instance = SSP()
 time.clock()
+instance.random_yes_instance(10)
+bestcase,worstcase,TotalTime,Candidate,Closeness = instance.Greedy2()
 
 ##print(instance.Iterative_Improvement(best_candidate))
-for n in range(10,101): # start the search with 5 elements in array, stop when there are 29 elements
+for n in range(10,500): # start the search with 5 elements in array, stop when there are 29 elements
     instance.resetvars()
     q += 1
      
 # start the clock
     for i in range(80): # After 5 iterations the loop ends. Loop starts again when new element is added to the array.
-        instance.random_yes_instance(n)
+        pass
+        ##instance.random_yes_instance(n)
+        ##instance.random_instance(n)
         ##instance.random_yes_instance(n)
         ##result = instance.Greedy()
         ##print( instance )
         ##bestcase,worstcase,TotalTime,best_candidate,result = instance.Greedy()
         #bestcase, worstcase , TotalTime = instance.exhaustive_search()
+        ##bestcase,worstcase,TotalTime,Candidate,Closeness = instance.Greedy2()
         
-        bestcase,worstcase,TotalTime,Candidate,Closeness = instance.Greedy2()
         ##instance.Dynamic_Programming()
         ##instance.try_at_random()
         ##bestcase, worstcase, TotalTime = instance.Dynamic_Programming()
@@ -251,7 +258,7 @@ for n in range(10,101): # start the search with 5 elements in array, stop when t
     
     ##print(time.clock(), "seconds LAST") # I was testing here, I think this prints the total time it took for all 5 searches 
 
-    print((TotalTime)/80*10) # Because the search is run amongst arrays of the same size 5 times, before incrementing the array size by 1, the avg would be the total clock time divided by 5. (Again just testing here)
+    ##print((TotalTime/80)*10) # Because the search is run amongst arrays of the same size 5 times, before incrementing the array size by 1, the avg would be the total clock time divided by 5. (Again just testing here)
     ##print(worstcase*10)
     ##print("best time ",bestcase*10)
 
